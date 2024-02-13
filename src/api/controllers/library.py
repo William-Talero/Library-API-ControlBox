@@ -39,3 +39,10 @@ def get_all_users():
         return response
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+    
+def validate_user(username: str, password: str):
+    try:
+        response = UserService.validate_user(username, password)
+        return response
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

@@ -42,3 +42,14 @@ class UserService:
         db = next(get_db())
         users = db.query(User).all()
         return users
+    
+    @staticmethod
+    def validate_user(username: str, password: str) -> bool:
+        db = next(get_db())
+        user = db.query(User).filter(User.username == username).first()
+        
+        if not user:
+            return {"userData": False, "validate": False}
+        
+        hashed_password = hashlib.sha256(password.encode()).hexdigest()
+        return {"user": True, "validate": user.hashed_password == hashed_password, "userData": user if user.hashed_password == hashed_password else False}

@@ -4,7 +4,7 @@
 from fastapi import APIRouter
 
 # Controllers
-from src.api.controllers.library import get_message, create_database, create_user, update_user, delete_user, get_all_users
+from src.api.controllers.library import get_message, create_database, create_user, update_user, delete_user, get_all_users, validate_user
 
 router = APIRouter()
 
@@ -32,3 +32,7 @@ def delete_user_route(user_id: int):
 @router.get("/get-all-users")
 def get_all_users_route(): 
     return get_all_users()
+
+@router.get("/validate-user")
+def validate_user_route(username: str, password: str):
+    return validate_user(username, password)
