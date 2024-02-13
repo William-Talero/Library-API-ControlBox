@@ -44,12 +44,22 @@ class UserService:
         return users
     
     @staticmethod
+    def get_user_by_id(user_id: int):
+        db = next(get_db())
+        user = db.query(User).filter(User.id == user_id).first()
+        if user:
+            user_data = {key: value for key, value in user.__dict__.items() if key != 'hashed_password'}
+            return user_data
+        else:
+            return "User not found."
+    
+    @staticmethod
     def validate_user(username: str, password: str) -> bool:
         db = next(get_db())
         user = db.query(User).filter(User.username == username).first()
         
         if not user:
-            return {"userData": False, "validate": False}
+            return {"user": False, "validate": False}
         
         hashed_password = hashlib.sha256(password.encode()).hexdigest()
         return {"user": True, "validate": user.hashed_password == hashed_password, "userData": user if user.hashed_password == hashed_password else False}

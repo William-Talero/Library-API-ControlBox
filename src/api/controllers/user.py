@@ -1,4 +1,4 @@
-from fastapi import HTTPException
+from fastapi import HTTPException, Depends
 from src.services.database_service import DatabaseService
 from src.services.user_service import UserService
 
@@ -36,6 +36,13 @@ def delete_user(user_id: int):
 def get_all_users():
     try:
         response = UserService.get_all_users()
+        return response
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+def get_user_by_id(user_id: int):
+    try: 
+        response = UserService.get_user_by_id(user_id)
         return response
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

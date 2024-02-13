@@ -4,8 +4,9 @@
 from fastapi import FastAPI
 
 # Routers 
-from src.api.routers import library
+from src.api.routers import database, user
 
 app = FastAPI()
 
-app.include_router(library.router, tags=["library"], prefix="/library")
+app.include_router(database.router, tags=["database"], prefix="/database")
+app.include_router(user.router, tags=["users"], prefix="/user")

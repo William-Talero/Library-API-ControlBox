@@ -1,10 +1,10 @@
-"""LIBRARY ROUTER"""
+"""USER ROUTER"""
 
 # FastAPI
 from fastapi import APIRouter
 
 # Controllers
-from src.api.controllers.library import get_message, create_database, create_user, update_user, delete_user, get_all_users, validate_user
+from src.api.controllers.user import get_message, create_user, update_user, delete_user, get_all_users, validate_user, get_user_by_id
 
 router = APIRouter()
 
@@ -12,10 +12,6 @@ router = APIRouter()
 @router.get("/")
 def library_route():
     return get_message()
-
-@router.post("/create-database")
-def create_database_route():
-    return create_database()
 
 @router.post("/create-user")
 def create_user_route(username: str, email: str, password: str):
@@ -32,6 +28,10 @@ def delete_user_route(user_id: int):
 @router.get("/get-all-users")
 def get_all_users_route(): 
     return get_all_users()
+
+@router.get("/get-user-by-id")
+def get_user_by_id_route(user_id: int):
+    return get_user_by_id(user_id)
 
 @router.get("/validate-user")
 def validate_user_route(username: str, password: str):
