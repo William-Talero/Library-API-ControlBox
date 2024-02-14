@@ -1,16 +1,8 @@
-from fastapi import HTTPException, Depends
-from src.services.database_service import DatabaseService
+from fastapi import HTTPException
 from src.services.user_service import UserService
 
 def get_message():
     return {"Hello": "World"}
-
-def create_database():
-    try:
-        response = DatabaseService.create_database()
-        return response
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
 
 def create_user(username: str, email: str, password: str):
     try:
