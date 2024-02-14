@@ -14,12 +14,12 @@ def library_route():
     return get_message()
 
 @router.post("/create-user")
-def create_user_route(username: str, email: str, password: str):
-    return create_user(username, email, password)
+def create_user_route(username: str, fullname: str, email: str, password: str):
+    return create_user(username, fullname, email, password)
 
 @router.put("/update-user")
-def update_user_route(user_id: int, username: str, email: str, password: str):
-    return update_user(user_id, username, email, password)
+def update_user_route(user_id: int, username: str, fullname: str, email: str, password: str):
+    return update_user(user_id, username, fullname, email, password)
 
 @router.delete("/delete-user")
 def delete_user_route(user_id: int):

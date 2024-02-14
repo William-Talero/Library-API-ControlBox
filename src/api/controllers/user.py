@@ -4,16 +4,16 @@ from src.services.user_service import UserService
 def get_message():
     return {"Hello": "World"}
 
-def create_user(username: str, email: str, password: str):
+def create_user(username: str, fullname: str, email: str, password: str):
     try:
-        response = UserService.create_user(username, email, password)
+        response = UserService.create_user(username, fullname, email, password)
         return response
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-def update_user(user_id: int, username: str, email: str, password: str):
+def update_user(user_id: int, username: str, fullname: str, email: str, password: str):
     try:
-        response = UserService.update_user(user_id, username, email, password)
+        response = UserService.update_user(user_id, username, fullname, email, password)
         return response
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

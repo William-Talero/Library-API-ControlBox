@@ -5,24 +5,26 @@ import hashlib
 
 class UserService:
     @staticmethod
-    def create_user(username: str, email: str, password: str):
+    def create_user(username: str, fullname: str, email: str, password: str):
         db = next(get_db())
         hashed_password = hashlib.sha256(password.encode()).hexdigest()
-        user = User(username=username, fullname="Maria", email=email, hashed_password=hashed_password)
+        user = User(username=username, fullname=fullname, email=email, hashed_password=hashed_password)
         db.add(user)
         db.commit()
         db.refresh(user)
         return user
 
     @staticmethod
-    def update_user(user_id: int, username: str, email: str, password: str):
+    def update_user(user_id: int, username: str, fullname: str, email: str, password: str):
         db = next(get_db())
         user = db.query(User).filter(User.id == user_id).first()
         if not user:
             return None
+        hashed_password = hashlib.sha256(password.encode()).hexdigest()
         user.username = username
+        user.fullname = fullname
         user.email = email
-        user.password = password
+        user.hashed_password = hashed_password
         db.commit()
         db.refresh(user)
         return user
