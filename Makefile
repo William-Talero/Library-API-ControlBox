@@ -4,3 +4,6 @@ help: ## Show this help
 
 api: ## Run the API
 	uvicorn src.api.main:app --reload
+
+app: ## Run the API
+	uvicorn src.api.main:app --host 0.0.0.0 --port 8000
